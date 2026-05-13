@@ -1,3 +1,4 @@
+// não usa BD
 using _14480_employes_managment.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;

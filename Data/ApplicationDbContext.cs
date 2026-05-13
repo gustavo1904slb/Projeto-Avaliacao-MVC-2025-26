@@ -14,3 +14,5 @@ namespace _14480_employes_managment.Data
         public DbSet<Employee> Employees { get; set; }
     }
 }
+//Add-Migration Nome
+//Update-Database

@@ -8,3 +8,6 @@
         public DateTime ModifiedOn { get; set; }
     }
 }
+// o Employee herda: Employee : UserActivity
+// evita repetir código
+// adiciona o controlo de criação e edição

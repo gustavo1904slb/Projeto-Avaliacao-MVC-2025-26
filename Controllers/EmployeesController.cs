@@ -1,4 +1,5 @@
-﻿using System;
+﻿// liga views, modelos, base de dados, e usa entity framework core via DbContext
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,7 +23,7 @@ namespace _14480_employes_managment.Controllers
         // GET: Employees
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Employees.ToListAsync());
+            return View(await _context.Employees.ToListAsync()); //mostra todos os funcionários
         }
 
         // GET: Employees/Details/5
@@ -34,7 +35,7 @@ namespace _14480_employes_managment.Controllers
             }
 
             var employee = await _context.Employees
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Id == id); // Mostra 1 funcionário pelo Id
             if (employee == null)
             {
                 return NotFound();
@@ -44,7 +45,7 @@ namespace _14480_employes_managment.Controllers
         }
 
         // GET: Employees/Create
-        public IActionResult Create()
+        public IActionResult Create() // Mostra Formulário Vazio
         {
             return View();
         }
@@ -66,6 +67,10 @@ namespace _14480_employes_managment.Controllers
             }
             return View(employee);
         }
+        //recebe Employee do formulário
+        //valida ModelState
+        //adiciona à BD
+        //SaveChangesAsync
 
         // GET: Employees/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -75,7 +80,7 @@ namespace _14480_employes_managment.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employees.FindAsync(id);
+            var employee = await _context.Employees.FindAsync(id); // carrega os dados
             if (employee == null)
             {
                 return NotFound();
@@ -99,7 +104,7 @@ namespace _14480_employes_managment.Controllers
             {
                 try
                 {
-                    _context.Update(employee);
+                    _context.Update(employee); // atualiza os dados
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -127,7 +132,7 @@ namespace _14480_employes_managment.Controllers
             }
 
             var employee = await _context.Employees
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Id == id); // Mostra a Configuração
             if (employee == null)
             {
                 return NotFound();
@@ -144,7 +149,7 @@ namespace _14480_employes_managment.Controllers
             var employee = await _context.Employees.FindAsync(id);
             if (employee != null)
             {
-                _context.Employees.Remove(employee);
+                _context.Employees.Remove(employee); //resmove da BD
             }
 
             await _context.SaveChangesAsync();
@@ -155,5 +160,6 @@ namespace _14480_employes_managment.Controllers
         {
             return _context.Employees.Any(e => e.Id == id);
         }
+        //Verifica se existe registo na BD.
     }
 }
