@@ -1,4 +1,4 @@
-﻿// liga views, modelos, base de dados, e usa entity framework core via DbContext
+// liga views, modelos, base de dados, e usa entity framework core via DbContext
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,22 +11,22 @@ using _14480_employes_managment.Models;
 
 namespace _14480_employes_managment.Controllers
 {
-    public class EmployeesController : Controller
+    public class InstrumentsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public EmployeesController(ApplicationDbContext context)
+        public InstrumentsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Employees
+        // GET: 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Employees.ToListAsync()); //mostra todos os funcionários
+            return View(await _context.Instrument.ToListAsync()); //mostra todos os funcionários
         }
 
-        // GET: Employees/Details/5
+        // GET: Instrument/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,45 +34,45 @@ namespace _14480_employes_managment.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employees
-                .FirstOrDefaultAsync(m => m.Id == id); // Mostra 1 funcionário pelo Id
-            if (employee == null)
+            var instrument = await _context.Instrument
+                .FirstOrDefaultAsync(m => m.Id == id); // Mostra 1 instrumento pelo Id
+            if (instrument == null)
             {
                 return NotFound();
             }
 
-            return View(employee);
+            return View(instrument);
         }
 
-        // GET: Employees/Create
+        // GET: Instrument/Create
         public IActionResult Create() // Mostra Formulário Vazio
         {
             return View();
         }
 
-        // POST: Employees/Create
+        // POST: Instrument/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Employee employee)
+        public async Task<IActionResult> Create(Instrument instrument)
         {
-            employee.CreatedById = "Gustavo SLB";
-            employee.CreatedOn = DateTime.Now;
+            instrument.CreatedById = "Gustavo SLB";
+            instrument.CreatedOn = DateTime.Now;
             if (ModelState.IsValid)
             {
-                _context.Add(employee);
+                _context.Add(instrument);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(employee);
+            return View(instrument);
         }
-        //recebe Employee do formulário
+        //recebe Instrument do formulário
         //valida ModelState
         //adiciona à BD
         //SaveChangesAsync
 
-        // GET: Employees/Edit/5
+        // GET: Instrument/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -80,22 +80,22 @@ namespace _14480_employes_managment.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employees.FindAsync(id); // carrega os dados
-            if (employee == null)
+            var instrument = await _context.Instrument.FindAsync(id); // carrega os dados
+            if (instrument == null)
             {
                 return NotFound();
             }
-            return View(employee);
+            return View(instrument);
         }
 
-        // POST: Employees/Edit/5
+        // POST: Instrument/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,EmpNo,FirstName,MiddleName,LastName,PhoneNumber,EmailAddress,Country,DateOfBirth,Address,Department,Designation, Function,CreatedById,CreatedOn,ModifiedById,ModifiedOn")] Employee employee)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,TipoInstrumento,Instrumento,UsaCordas")] Instrument instrument)
         {
-            if (id != employee.Id)
+            if (id != instrument.Id)
             {
                 return NotFound();
             }
@@ -104,12 +104,12 @@ namespace _14480_employes_managment.Controllers
             {
                 try
                 {
-                    _context.Update(employee); // atualiza os dados
+                    _context.Update(instrument); // atualiza os dados
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EmployeeExists(employee.Id))
+                    if (!EmployeeExists(instrument.Id))
                     {
                         return NotFound();
                     }
@@ -120,10 +120,10 @@ namespace _14480_employes_managment.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(employee);
+            return View(instrument);
         }
 
-        // GET: Employees/Delete/5
+        // GET: Instrument/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -131,25 +131,25 @@ namespace _14480_employes_managment.Controllers
                 return NotFound();
             }
 
-            var employee = await _context.Employees
+            var instrument = await _context.Instrument
                 .FirstOrDefaultAsync(m => m.Id == id); // Mostra a Configuração
-            if (employee == null)
+            if (instrument == null)
             {
                 return NotFound();
             }
 
-            return View(employee);
+            return View(instrument);
         }
 
-        // POST: Employees/Delete/5
+        // POST: Instrument/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var employee = await _context.Employees.FindAsync(id);
-            if (employee != null)
+            var instrument = await _context.Instrument.FindAsync(id);
+            if (instrument != null)
             {
-                _context.Employees.Remove(employee); //resmove da BD
+                _context.Instrument.Remove(instrument); //remove da BD
             }
 
             await _context.SaveChangesAsync();
@@ -158,7 +158,7 @@ namespace _14480_employes_managment.Controllers
 
         private bool EmployeeExists(int id)
         {
-            return _context.Employees.Any(e => e.Id == id);
+            return _context.Instrument.Any(e => e.Id == id);
         }
         //Verifica se existe registo na BD.
     }

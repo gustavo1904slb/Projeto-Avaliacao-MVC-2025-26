@@ -15,5 +15,6 @@
         public string Address { get; set; }
         public string Department { get; set; }
         public string Designation { get; set; }
+        public string Function { get; set; }
     }
 }

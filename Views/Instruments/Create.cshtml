@@ -1,0 +1,53 @@
+﻿@model _14480_employes_managment.Models.Instrument
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Instrument</h4>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="TipoInstrumento" class="control-label"></label>
+                        <input asp-for="TipoInstrumento" class="form-control" />
+                        <span asp-validation-for="TipoInstrumento" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Instrumento" class="control-label"></label>
+                        <input asp-for="Instrumento" class="form-control" />
+                        <span asp-validation-for="Instrumento" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="UsaCordas" class="control-label"></label>
+                        <input asp-for="UsaCordas" class="form-control" />
+                        <span asp-validation-for="UsaCordas" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

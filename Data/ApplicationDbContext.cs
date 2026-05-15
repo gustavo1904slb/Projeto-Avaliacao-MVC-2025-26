@@ -11,7 +11,9 @@ namespace _14480_employes_managment.Data
         {
         }
 
-        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Employee> Employees { get; set; }        
+        public DbSet<Instrument> Instrument { get; set; }
+
     }
 }
 //Add-Migration Nome
